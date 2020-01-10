@@ -1,0 +1,15 @@
+{
+  "name": "aiwcore",
+  "version": "1.0.0",
+  "description": "Aiw Software for AIW, Ferntech",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron main"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^7.1.8",
+    "nodemon": "^2.0.2"
+  }
+}
