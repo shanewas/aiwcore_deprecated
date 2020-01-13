@@ -1,19 +1,22 @@
 const electron = require('electron')
 const url = require('url')
 const path = require('path')
+const windowCollection = require('./js/window_collection')
+// import {addwindow, createAddWindow} from 'window_collection.js';
 
-const { app, BrowserWindow, Menu} = electron
+const { app, BrowserWindow, Menu } = electron
 
 let mainWindow
-let addWindow
+// let addWindow
 
 //Listen for app to be ready
 app.on('ready', function(){
     //create new window
     mainWindow = new BrowserWindow({})
     //Load html into windows
+
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
+        pathname: path.join(__dirname, 'views/index.html'),
         protocol: 'file:',
         slashes: true
     }))
@@ -25,21 +28,7 @@ app.on('ready', function(){
     //Inset menu
     Menu.setApplicationMenu(mainMenu)
 })
-//Handle create add window
-function createAddWindow(){
-    addWindow = new BrowserWindow({
-        width: 300,
-        height: 200,
-        title: 'Test adding window'
-    })
-    //load html into new window
-    addWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'addwindow.html'),
-        protocol: 'file:',
-        slashes: true
-    }))
-    addWindow.on('closed', () => addWindow = null)
-}
+
 
 const mainMenuTempate = [
     {
@@ -48,7 +37,7 @@ const mainMenuTempate = [
             {
                 label: 'Web Scrapping',
                 click(){
-                    createAddWindow()
+                    windowCollection.createAddWindow()
                 }
             },
             {
