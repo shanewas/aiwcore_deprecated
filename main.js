@@ -2,12 +2,11 @@ const electron = require('electron')
 const url = require('url')
 const path = require('path')
 const menu = require('./js/menu')
-
-// import {addwindow, createAddWindow} from 'window_collection.js';
+const conf = require('./js/config')
 
 const { app, BrowserWindow, Menu } = electron
+
 let mainWindow
-// let addWindow
 
 //Listen for app to be ready
 app.on('ready', function(){
@@ -29,27 +28,4 @@ app.on('ready', function(){
     Menu.setApplicationMenu(mainMenu)
 })
 
-
-//if mac add empty onject with menu
-if (process.platform == 'darwin'){
-    menu.mainMenuTempate.unshift({})
-}
-
-//Add developer tools inf not in prod
-if(process.env.NODE_ENV !== 'production'){
-    menu.mainMenuTempate.push({
-        label: 'Developer Tools',
-        submenu: [
-            {
-                label: 'Toggle DevTools',
-                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
-                click(item, focusedWindow){
-                    focusedWindow.toggleDevTools()
-                }
-            },
-            {
-                role: 'reload'
-            }
-        ]
-    })
-}
+conf.config()
