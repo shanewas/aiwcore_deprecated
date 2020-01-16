@@ -6,21 +6,28 @@ let path_ = path.join(__dirname, "inject.js");
 
 window.onload = function() {
   var x = document.getElementsByTagName("BODY")[0];
-  x.className = "main"
-//   x.addEventListener("click", addclick);
-  let div = document.createElement("div");
+  x.id = "main";
+  // var body = document.getElementById("main");
+  const body = document.querySelector('body')
+  body.style.color = "red";
+  body.addEventListener("click", getXPath);
+  // let div = document.createElement("div");
+  //*[@id="main"]/div/div[1]/div/h1
+  // div.className = "document";
+  // div.innerHTML = '<div onclick="addclick()"></div>';
 
-  div.className = "document";
-  div.innerHTML = '<div onclick="addclick()"></div>';
-
-  document.body.append(div);
+  // document.body.append(div);
   //   document.body.style.backgroundColor = "red";
   //   // console.log(x)
   //   var seq = [];
 };
+function getXPath(element) {
+  var elm = element.path[0];
+  console.log(elm);
+}
 function addclick() {
-//   var target = event.target;
-//   seq.push(target.id);
+  //   var target = event.target;
+  //   seq.push(target.id);
   console.log("pushed");
 }
 
