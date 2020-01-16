@@ -1,31 +1,33 @@
-const electron = require('electron')
-const url = require('url')
-const path = require('path')
-const menu = require('./js/menu')
-const conf = require('./js/config')
+const electron = require("electron");
+const electronWindowManager = require("electron-window-manager");
+const url = require("url");
+const path = require("path");
 
-const { app, BrowserWindow, Menu } = electron
+const menu = require("./js/menu");
+const conf = require("./js/config");
+const createWindow = require("./js/createWindow");
 
-let mainWindow
+const { app, BrowserWindow, Menu, ipcRenderer } = electron;
+const urls = ["https://google.com", "https://jsonplaceholder.typicode.com/"];
+
+let win;
 
 //Listen for app to be ready
-app.on('ready', function(){
-    //create new window
-    mainWindow = new BrowserWindow({})
-    //Load html into windows
+app.on("ready", function() {
+  win = createWindow.createWindow(urls[1]);
 
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'views/index.html'),
-        protocol: 'file:',
-        slashes: true
-    }))
-    // Quit app when closed
-    mainWindow.on('closed', () => app.quit())
+  win.once("ready-to-show", function() {
+    win.show();
+  });
 
-    //Build menu
-    const mainMenu = Menu.buildFromTemplate(menu.mainMenuTempate)
-    //Inset menu
-    Menu.setApplicationMenu(mainMenu)
-})
+  win.on("closed", function() {
+    win = null;
+  });
 
-conf.config()
+  //Build menu
+  const mainMenu = Menu.buildFromTemplate(menu.mainMenuTempate);
+  //Inset menu
+  Menu.setApplicationMenu(mainMenu);
+});
+
+conf.config();

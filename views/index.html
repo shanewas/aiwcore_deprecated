@@ -1,28 +1,79 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<title>Hello World!</title>
-		<!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
-		<meta
-			http-equiv="Content-Security-Policy"
-			content="script-src 'self' 'unsafe-inline';"
-		/>
-	</head>
-	<body>
-		<h1>Hello World!</h1>
-		We are using node
-		<script>
-			document.write(process.versions.node);
-		</script>
-		, Chrome
-		<script>
-			document.write(process.versions.chrome);
-		</script>
-		, and Electron
-		<script>
-			document.write(process.versions.electron);
-		</script>
-		.
-	</body>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Hello World!</title>
+	<!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+	<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+
+<body>
+	<h1>Hello World!</h1>
+	<p> are using node </p>
+	<div class="mainwrapper">
+		<div class="navbox" id="js-navigation">
+			<a href="./about.html">About</a>
+			<a href="./location.html">Location</a>
+			<a href="./contact.html">Contact</a>
+			<a href="./inquiries.html">Inquiries</a>
+			<a href="./employees.html">Employees</a>
+		</div>
+
+		<div id="header"></div>
+
+		<div id="js-content">
+			<!-- content will be loaded here -->
+		</div>
+	</div>
+	<!-- <script>
+		document.write(process.versions.node);
+	</script>
+	, Chrome
+	<script>
+		document.write(process.versions.chrome);
+	</script>
+	, and Electron
+	<script>
+		document.write(process.versions.electron);
+	</script> -->
+	<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#js-content').load('addwindow.html');
+
+			$('#js-navigation a').click(function (e) {
+				e.preventDefault();
+				$("#js-content").load(e.target.href);
+			})
+		});
+	</script>
+	<!-- <script>
+		function load_home() {
+			document.getElementById("content").innerHTML = '<object type="text/html" data="aiwcore/views/addwindow.html" ></object>';
+		}
+		// var seq = []
+
+		// function addclick() {
+
+		// 	var target = event.target;
+		// 	seq.push(target.id);
+		// 	console.log("pushed");
+
+		// }
+
+		// function xpathgenarator(seq) {
+		// 	xp = []
+		// 	seq.forEach(function (item) {
+		// 		path = "//*[@id=\"" + item + "\"]"
+		// 		xp.push(path)
+		// 	})
+		// 	console.log(xp)
+		// 	return xp
+		// }
+		// xpathgenarator()
+
+	</script> -->
+</body>
+
 </html>
