@@ -3,8 +3,8 @@ Robotic process automation (RPA) is a software technology that makes it easy to 
 
 ## Technology Used
 
-Electron
-JavaScript
-Express
-NodeJs
-Mongodb
+- Electron
+- JavaScript
+- Express
+- NodeJs
+- Mongodb
